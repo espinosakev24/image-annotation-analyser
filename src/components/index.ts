@@ -1,0 +1,1 @@
+export { ImageAnnotationCanvas } from './ImageAnnotationCanvas';

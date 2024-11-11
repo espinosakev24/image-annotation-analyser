@@ -1,0 +1,21 @@
+.categoriesContainer {
+  height: 390px;
+  overflow-y: auto;
+}
+
+.categoriesContainer p {
+  text-align: left;
+  cursor: pointer;
+}
+
+.searchInput {
+  height: 50px;
+  display: flex;
+  margin-bottom: 12px;
+}
+
+.searchInput input {
+  width: 80%;
+  border-radius: 8px;
+  padding: 0 12px;
+}

@@ -1,0 +1,8 @@
+.annotationsContainer {
+  display: flex;
+  gap: 42px;
+}
+
+.canvasContainer {
+  margin-bottom: 12px;
+}

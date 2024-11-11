@@ -1,0 +1,14 @@
+#root {
+  max-width: 1280px;
+  padding: 2rem;
+  text-align: center;
+}
+
+.canvas-container {
+  margin-bottom: 12px;
+}
+
+.annotations-container {
+  display: flex;
+  gap: 42px;
+}
