@@ -18,7 +18,7 @@ import { ImageCarousel } from './components/ImageCarousel';
 function App() {
   const [currentImage, setCurrentImage] = useState<ImageRepresentation>();
   const [images, setImages] = useState<ImageRepresentation[]>([]);
-  const [categories, setCategories] = useState([]);
+  const [categories, setCategories] = useState<Category[]>([]);
   const [searchValue, setSearchValue] = useState('');
   const [category, setCategory] = useState<Category | null>();
   const { annotations, discardAnnotations } = useDataContext();
@@ -43,7 +43,7 @@ function App() {
 
     getCategories().then((res) => {
       setCategories(
-        res.map((category: Category) => ({
+        res.map((category) => ({
           ...category,
           color: getRandomColor(),
         }))
@@ -62,25 +62,17 @@ function App() {
   const onConfirm = () => {
     if (!currentImage) return;
 
-    submitBoxes(currentImage?.id, annotations)
-      .then(() => {
-        notify('Annotations submitted successfully', 'success');
-      })
-      .catch((error: Error) => {
-        notify(error.message, 'error');
-      });
+    submitBoxes(currentImage?.id, annotations).then(() => {
+      notify('Annotations submitted successfully', 'success');
+    });
   };
 
   const onDiscard = () => {
     if (!currentImage) return;
 
-    discardBoxes(currentImage.id)
-      .then(() => {
-        discardAnnotations();
-      })
-      .catch((error: Error) => {
-        notify(error.message, 'error');
-      });
+    discardBoxes(currentImage.id).then(() => {
+      discardAnnotations();
+    });
   };
 
   const confirmDisabled = !category || annotations.length === 0;
