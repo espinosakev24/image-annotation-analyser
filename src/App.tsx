@@ -25,15 +25,19 @@ function App() {
 
   const handleImageClick = (id: number, imgUrl: string) => {
     setCategory(null);
-    fetch(imgUrl)
-      .then((res) => res.blob())
-      .then((blob) => {
-        const url = URL.createObjectURL(blob);
-        setCurrentImage({ url, id });
-      })
-      .catch((error: Error) => {
-        notify(error.message, 'error');
-      });
+    setCurrentImage({ url: imgUrl, id });
+
+    // A better implementation would be to fetch the image in order to handle network errors
+    // like this:
+    // fetch(imgUrl)
+    //   .then((res) => res.blob())
+    //   .then((blob) => {
+    //     const url = URL.createObjectURL(blob);
+    //     setCurrentImage({ url, id });
+    //   })
+    //   .catch((error: Error) => {
+    //     notify(error.message, 'error');
+    //   });
   };
 
   useEffect(() => {
