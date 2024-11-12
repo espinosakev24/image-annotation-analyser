@@ -23,23 +23,30 @@ export const DataContextProvider = ({ children }: DataContextProviderProps) => {
   const [annotations, setAnnotations] = useState<Annotation[]>([]);
 
   const addBoxToAnnotation = (id: number, box: BoundingBox) => {
-    setAnnotations((s) => {
-      const existingAnnotation = s.find(
+    setAnnotations((currentAnnotations) => {
+      const existingAnnotation = currentAnnotations.find(
         (annotation) => annotation.categoryId === id
       );
 
       if (existingAnnotation) {
-        return s.map((annotation) =>
-          annotation.categoryId === id
-            ? {
-                ...annotation,
-                boundingBoxes: [...annotation.boundingBoxes, box],
-              }
-            : annotation
-        );
-      } else {
-        return [...s, { categoryId: id, boundingBoxes: [box] }];
+        return currentAnnotations.map((annotation) => {
+          if (annotation.categoryId === id) {
+            return {
+              ...annotation,
+              boundingBoxes: [...annotation.boundingBoxes, box],
+            };
+          }
+          return annotation;
+        });
       }
+
+      return [
+        ...currentAnnotations,
+        {
+          categoryId: id,
+          boundingBoxes: [box],
+        },
+      ];
     });
   };
 
